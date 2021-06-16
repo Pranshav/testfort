@@ -117,7 +117,28 @@ bool Currency::getBlockReward(size_t medianSize, size_t currentBlockSize, uint64
 
   return true;
 }
+/*
+bool Currency::getBlockReward(size_t medianSize, size_t currentBlockSize, uint64_t alreadyGeneratedCoins,
+                                uint64_t fee, uint64_t height, uint64_t& reward, int64_t& emissionChange) const {
+      assert(alreadyGeneratedCoins <= m_moneySupply);
 
+      uint64_t baseReward = baseRewardFunction(alreadyGeneratedCoins, height);
+
+      size_t blockGrantedFullRewardZone = m_blockGrantedFullRewardZone;
+      medianSize = std::max(medianSize, blockGrantedFullRewardZone);
+      if (currentBlockSize > UINT64_C(2) * medianSize) {
+        LOG_PRINT_L4("Block cumulative size is too big: " << currentBlockSize << ", expected less than " << 2 * medianSize);
+        return false;
+      }
+
+      uint64_t penalizedBaseReward = getPenalizedAmount(baseReward, medianSize, currentBlockSize);
+
+      emissionChange = penalizedBaseReward;
+      reward = penalizedBaseReward + fee;
+
+      return true;
+  }
+*/
 size_t Currency::maxBlockCumulativeSize(uint64_t height) const {
   assert(height <= std::numeric_limits<uint64_t>::max() / m_maxBlockSizeGrowthSpeedNumerator);
   size_t maxSize = static_cast<size_t>(m_maxBlockSizeInitial +
